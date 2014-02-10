@@ -24,7 +24,14 @@ for word in wordlist:
     else:
         word_dict.setdefault(word,1)
 
-
+# prints output alphabetically
+print "PRINTING KEYS SORTED ALPHABETICALLY"
 pprint.pprint(word_dict)
-    
+
+word_dict_sorted_keys = sorted(word_dict, key=word_dict.get)
+
+print "PRINTING KEYS SORTED BY VALUE (LOW TO HIGH)"
+for item in word_dict_sorted_keys:
+    print item, word_dict[item]
+
 
