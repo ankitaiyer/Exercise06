@@ -30,30 +30,32 @@ resultlist = []
 key_list = []
 
 unique_value_list = list(set(word_dict.values()))
-#print type(unique_value_list)
-# listname1 =[]
+print type(unique_value_list)
 
-# for key,value in word_dict.items():
-#     for i in range(len(unique_value_list)):
-#         print i
-#         print 'unique_value_list',unique_value_list[i] 
-#         if value == i:
-# print listname1
+lname = []
+for i in unique_value_list:
+    lname.append("listname" + str(i))
+print lname
 
-word10list = []
-for key, value in word_dict.iteritems():
-    if value == 10:
-        word10list.append(key)
+for i in lname:
+    lname[i] = []
+    print i, type(i)
+  
 
-word10list_sorted = sorted(word10list)
-print word10list_sorted
+# word10list = []
+# for key, value in word_dict.iteritems():
+#     if value == 10:
+#         word10list.append(key)
 
-result_dict = {}
-for i in word10list_sorted:
-    #result_dict[i] = word_dict[i]
-    resultlist.extend([(i, word_dict[i])])
+# word10list_sorted = sorted(word10list)
+# print word10list_sorted
 
-print resultlist
+# result_dict = {}
+
+# for i in unique_value_list:
+#     result_dict[i] = word10list_sorted
+  
+# print result_dict
 
 
 
