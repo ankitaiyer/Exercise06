@@ -1,17 +1,15 @@
-
 import pprint
 
-inputfile = open("medium.txt")
+inputfile = open("short.txt")
 filecontents = inputfile.read()
 
 before_wordlist = filecontents.lower().split()
 
+# Separating file into words
 wordlist = []
 for word in before_wordlist:
     newword = word.strip(",.:?!#*()[]%@$^&")
     wordlist.append(newword)
-
-
 
 word_dict = {}
 
@@ -22,16 +20,40 @@ for word in wordlist:
     if word in word_dict:
         word_dict[word]+= 1
     else:
-        word_dict.setdefault(word,1)
+        #word_dict.setdefault(word,1)
+        word_dict[word] = 1
 
-# prints output alphabetically
-print "PRINTING KEYS SORTED ALPHABETICALLY"
+#print "PRINTING KEYS SORTED ALPHABETICALLY"
 pprint.pprint(word_dict)
 
-word_dict_sorted_keys = sorted(word_dict, key=word_dict.get)
+resultlist = []
+key_list = []
 
-print "PRINTING KEYS SORTED BY VALUE (LOW TO HIGH)"
-for item in word_dict_sorted_keys:
-    print item, word_dict[item]
+unique_value_list = list(set(word_dict.values()))
+#print type(unique_value_list)
+# listname1 =[]
+
+# for key,value in word_dict.items():
+#     for i in range(len(unique_value_list)):
+#         print i
+#         print 'unique_value_list',unique_value_list[i] 
+#         if value == i:
+# print listname1
+
+word10list = []
+for key, value in word_dict.iteritems():
+    if value == 10:
+        word10list.append(key)
+
+word10list_sorted = sorted(word10list)
+print word10list_sorted
+
+result_dict = {}
+for i in word10list_sorted:
+    #result_dict[i] = word_dict[i]
+    resultlist.extend([(i, word_dict[i])])
+
+print resultlist
+
 
 
