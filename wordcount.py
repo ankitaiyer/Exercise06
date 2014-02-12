@@ -1,19 +1,24 @@
 import pprint
+from sys import argv
 
-inputfile = open("short.txt")
+script, filename = argv
+
+inputfile = open(filename)
 filecontents = inputfile.read()
 
+# Separating file into words
 before_wordlist = filecontents.lower().split()
 
-# Separating file into words
+# Striping special characters from the words
 wordlist = []
 for word in before_wordlist:
     newword = word.strip(",.:?!#*()[]%@$^&")
     wordlist.append(newword)
 
+#Create a new dict to count - number of times each word appear in the list.
 word_dict = {}
 
-#go thru wordlist, if increment the value if the word exists,
+#go thru wordlist, increment the counter value if the word exists,
 #else if word is not in the dict, add it as a key, default value of 1
 
 for word in wordlist:
@@ -23,39 +28,36 @@ for word in wordlist:
         #word_dict.setdefault(word,1)
         word_dict[word] = 1
 
-#print "PRINTING KEYS SORTED ALPHABETICALLY"
+#PPrint sorts the dict alphabetically and prints the same 
+print "-------------------------------------"
+print "ORIGNAL WORDS LIST = " , word_dict 
+print "-------------------------------------"
+print "PRINTING KEYS SORTED ALPHABETICALLY"
+print "-------------------------------------"
 pprint.pprint(word_dict)
-
-resultlist = []
-key_list = []
-
-unique_value_list = list(set(word_dict.values()))
-print type(unique_value_list)
-
-lname = []
-for i in unique_value_list:
-    lname.append("listname" + str(i))
-print lname
-
-for i in lname:
-    lname[i] = []
-    print i, type(i)
-  
-
-# word10list = []
-# for key, value in word_dict.iteritems():
-#     if value == 10:
-#         word10list.append(key)
-
-# word10list_sorted = sorted(word10list)
-# print word10list_sorted
-
-# result_dict = {}
-
-# for i in unique_value_list:
-#     result_dict[i] = word10list_sorted
-  
-# print result_dict
+print "-------------------------------------"
+print "-------------------------------------"
 
 
+#Print words sorted by their frequency High to low in the list
+word_dict_keys_sorted_by_value = sorted(word_dict, key=word_dict.get, reverse=True)
+print "PRINTING KEYS SORTED BY THEIR FREQUENCY - HIGH-TO_LOW in the file"
+print word_dict_keys_sorted_by_value
+print "-------------------------------------"
 
+
+# Create new dict twith Key=Frequency of words e.g 5 times, 
+# and Value= List of all the words that appear 5 times
+swapped_word_dict = {}
+for key, value in word_dict.items():
+    if value not in swapped_word_dict.keys():
+        swapped_word_dict[value] = [key]
+    else:
+        swapped_word_dict[value].append(key)  
+
+print "After sorting Alphabeticlly by frequency, list is as follows"
+print "-------------------------------------"
+for frequency in sorted(swapped_word_dict , reverse=True):
+    for words in sorted(swapped_word_dict[frequency]):
+        print frequency , words
+print "-------------------------------------"
